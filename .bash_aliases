@@ -20,9 +20,9 @@ promptFunc() {
 
     branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
     if [ ! $branch ]; then
-        PS1=${PWD}"$ "
+        PS1="\[\e[32m\]"${PWD}"\[\e[00m\]$ "
     else
-        PS1="\W: "${branch}"-> "
+        PS1="\[\e[32m\]\W: \[\e[91m\]("${branch}")\[\e[00m\]-> "
     fi
 }
 
