@@ -1,5 +1,7 @@
 alias ..='cd ..'
 alias latex='docker run -v `pwd`:/tmp latex pdflatex'
+alias e='emacs . &'
+alias su='source ~/.bashrc'
 
 # Show git branch name
 force_color_prompt=yes
