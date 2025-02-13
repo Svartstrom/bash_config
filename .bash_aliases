@@ -1,31 +1,29 @@
+#! /bin/bash
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 alias ..='cd ..'
+alias z='zellij -l welcome'
+alias z1='zellij --session first-test --layout ~/.config/zellij/first_layout.kdl'
+alias zs='zellij --layout ~/.config/zellij/simulator_layout.kdl'
+alias za='zellij attach'
+alias zl='zellij list-sessions'
+alias lg='lazygit'
+alias ld='lazydocker'
+
+alias checkVPN='ping salfp1'
 alias latex='docker run -v `pwd`:/tmp latex pdflatex'
 alias e='emacs . &'
-alias su='source ~/.bashrc'
+alias so='source ~/.bashrc'
+alias update='sudo apt update'
+alias upgrade='sudo apt upgrade'
+alias upup='update && upgrade'
+alias clean_docker='docker system prune -af --volumes && docker rm -vf $(docker ps -aq) && docker rmi -f $(docker images -aq)'
+alias V='~/SAL/bin/smb-dfs1.sh'
+alias yazi='~/Github/yazi/target/release/yazi'
+alias va='source .venv/bin/activate'
+alias vd='deactivate'
+alias vv='python3 -m venv .venv'
+alias vu='python3 -m pip install -r requirements.txt'
 
-# Show git branch name
-force_color_prompt=yes
-color_prompt=yes
-parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-if [ "$color_prompt" = yes ]; then
-#PS1="[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u\[\033[1;33m\]-> \[\033[0m\]"
- PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
- PS1="[\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]\u\[\033[1;33m\]\[\033[01;32m\]\[\033[00m\]:\[\033[01;34m\]\[\033[01;31m\]$(parse_git_branch)\[\033[00m\] -> \[\033[0m\]"
-else
- PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
-fi
-unset color_prompt force_color_prompt
-
-promptFunc() {
-
-    branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
-    if [ ! $branch ]; then
-        PS1="\[\e[32m\]"${PWD}"\[\e[00m\]$ "
-    else
-        PS1="\[\e[32m\]\W: \[\e[91m\]("${branch}")\[\e[00m\]-> "
-    fi
-}
-
-export PROMPT_COMMAND="promptFunc"
+eval "$(starship init bash)"
